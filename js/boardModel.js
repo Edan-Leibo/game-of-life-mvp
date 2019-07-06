@@ -1,28 +1,69 @@
+
+
+
 export default class ModelBoard {
+
+    constructor() {
+        this.THRESHOLD = 4;
+        this.board = [];
+    }
 
     createBoard(n, m) {
         for (let i = 0; i < n; i++) {
-            const newRow = document.createElement('tr');
-            board.appendChild(newRow);
+            this.board[i] = [];
             for (let j = 0; j < m; j++) {
-                const newCell = document.createElement('td');
-                newRow.appendChild(newCell);
+                this.board[i][j] = Math.floor(Math.random() * 11) > this.THRESHOLD ? false : true;
             }
         }
     }
 
-    randomCellsOnBoard(threshold) {
-        for (let i = 0; i < n; i++) {
-            const newRow = document.createElement('tr');
-            board.appendChild(newRow);
-            for (let j = 0; j < m; j++) {
-                const newCell = document.createElement('td');
-                newRow.appendChild(newCell);
+
+    performStep() {
+        console.log("dfosfndsf");
+        let futureBoard = [];
+
+        for (let x = 0; x < this.board.length; x++) {
+            futureBoard[x] = [];
+            for (let y = 0; y < this.board[x].length; y++) {
+                let numOfNighbours = 0;
+                for (var dx = -1; dx <= 1; dx++) {
+                    for (var dy = -1; dy <= 1; dy++) {
+                        if (dx == 0 && dy == 0) continue;
+                        else if (typeof this.board[x + dx] !== 'undefined'
+                            && typeof this.board[x + dx][y + dy] !== 'undefined'
+                            && this.board[x + dx][y + dy]) {
+                            numOfNighbours++;
+                        }
+                    }
+                }
+                let current = this.board[x][y];
+                switch (numOfNighbours) {
+                    case 0:
+                    case 1:
+                        current = false;
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        current = true;
+                        break;
+                    default:
+                        current = false;
+                }
+                futureBoard[x][y] = current;
             }
         }
+        console.log(this.board);
+        this.board = futureBoard;
+        console.log(this.board);
+
+        this.onBoardChangeCallback(this.board);
+    }
+
+    addBoardChangeListener(callback) {
+        this.onBoardChangeCallback = callback;
     }
 
 }
 
 
-console.log("hello hi!");

@@ -1,12 +1,10 @@
 import BoardModel from "./boardModel.js";
 import { boardView } from "./boardView.js";
+import { boardPresenter } from "./boardPresenter.js";
 
 
-const n = 10;
-const m = 15;
-
-
+const N = 10;
+const M = 15;
 const boardModel = new BoardModel();
-boardView.renderInitialBoard(null, n, m);
 
-boardModel.createBoard();
+boardPresenter.init(N, M, boardModel, boardView);
