@@ -1,0 +1,14 @@
+.board__cell{
+    padding:20px;
+    border: 1px solid black;
+    
+}
+
+.board__cell--alive{
+    background-color: aqua;
+    transition: all 1s;
+}
+
+.board__cell--dead{
+    background-color: black;
+}
