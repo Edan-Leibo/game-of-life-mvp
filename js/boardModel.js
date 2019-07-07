@@ -19,7 +19,6 @@ export default class ModelBoard {
 
 
     performStep() {
-        console.log("dfosfndsf");
         let futureBoard = [];
 
         for (let x = 0; x < this.board.length; x++) {
@@ -53,10 +52,7 @@ export default class ModelBoard {
                 futureBoard[x][y] = current;
             }
         }
-        console.log(this.board);
         this.board = futureBoard;
-        console.log(this.board);
-
         this.onBoardChangeCallback(this.board);
     }
 

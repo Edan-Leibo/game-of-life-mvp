@@ -9,7 +9,9 @@ export const boardView = (function () {
 
     //UI Elements
     const board = document.querySelector(".board");
-    const step = document.querySelector(".step");
+    const step = document.querySelector(".control-panel__step-button");
+    const play = document.querySelector(".control-panel__play-button");
+    const stop = document.querySelector(".control-panel__stop-button");
     const cells = [];   //2d array containing references to all the cells
 
 
@@ -27,6 +29,12 @@ export const boardView = (function () {
 
         addStepListener(callback) {
             step.addEventListener("click", callback);
+        },
+        addPlayListener(callback) {
+            play.addEventListener("click", callback);
+        },
+        addStopListener(callback) {
+            stop.addEventListener("click", callback);
         },
 
         /*
