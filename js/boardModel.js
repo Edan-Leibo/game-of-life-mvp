@@ -1,6 +1,5 @@
 
 
-
 export default class ModelBoard {
 
     constructor() {
@@ -15,6 +14,7 @@ export default class ModelBoard {
                 this.board[i][j] = Math.floor(Math.random() * 101) > this.density ? false : true;
             }
         }
+        this.onBoardCreatedCallback(this.board);
     }
 
     setDensity(newDensity) {
@@ -66,6 +66,10 @@ export default class ModelBoard {
 
     addBoardChangeListener(callback) {
         this.onBoardChangeCallback = callback;
+    }
+
+    addBoardCreatedListener(callback) {
+        this.onBoardCreatedCallback = callback;
     }
 
 }

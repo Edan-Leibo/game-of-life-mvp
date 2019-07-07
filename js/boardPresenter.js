@@ -15,9 +15,19 @@ export const boardPresenter = {
         this.n = n;
         this.m = m;
 
+        boardModel.addBoardCreatedListener((newBoard) => {
+            boardView.createBoard(newBoard, this.n, this.m);
+        });
+
+        boardModel.addBoardChangeListener((newBoard) => {
+            boardView.changeBoard(newBoard, this.n, this.m);
+        });
+
+
+
+
         this.createBoard(n, m);
 
-        boardModel.addBoardChangeListener((newBoard) => boardView.renderBoard(newBoard, n, m));
 
         boardView.addStepListener(() => boardModel.performStep());
         boardView.addPlayListener(() => {
@@ -42,11 +52,20 @@ export const boardPresenter = {
             clearInterval(this.timer);
             this.timer = null;
         });
-        boardView.addCreateListener(() => {
+        boardView.addCreateListener((userN, userM) => {
             this.isRunning = false;
             clearInterval(this.timer);
             this.timer = null;
-            this.createBoard(n, m);
+
+            if (!userN || !userM)
+                this.createBoard(this.n, this.m);
+            else {
+                this.n = userN;
+                this.m = userM;
+
+
+                this.createBoard(userN, userM);
+            }
         });
         boardView.addCellClickedListener((i, j) => {
             boardModel.toggleCell(i, j);
@@ -55,7 +74,5 @@ export const boardPresenter = {
 
     createBoard() {
         this.boardModel.createBoard(this.n, this.m);
-        const { board } = this.boardModel;
-        this.boardView.renderBoard(board, this.n, this.m);
     }
 };

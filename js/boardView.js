@@ -15,6 +15,9 @@ export const boardView = (function () {
     const speed = document.querySelector(".control-panel__speed");
     const create = document.querySelector(".create-board-button");
     const density = document.querySelector(".density");
+    const nSize = document.querySelector(".nSize");
+    const mSize = document.querySelector(".mSize");
+
 
 
 
@@ -45,7 +48,14 @@ export const boardView = (function () {
             density.addEventListener("input", () => callback(density.value));
         },
         addCreateListener(callback) {
-            create.addEventListener("click", callback);
+            create.addEventListener("click", () => {
+                const n = nSize.value;
+                const m = mSize.value;
+                if (!(n > 100 || m > 100 || n < 10 || m < 10)) {
+                    callback(n, m)
+                }
+            }
+            );
         },
         addCellClickedListener(callback) {
             board.addEventListener("click", (event) => {
@@ -64,7 +74,7 @@ export const boardView = (function () {
             Renders a new board on the page
             arr - The array to be rendered 
         */
-        renderBoard(arr, n, m) {
+        createBoard(arr, n, m) {
             board.innerHTML = "";
             for (let i = 0; i < n; i++) {
                 const newRow = document.createElement('tr');
@@ -72,10 +82,22 @@ export const boardView = (function () {
                 for (let j = 0; j < m; j++) {
                     const newCell = document.createElement('td');
                     newCell.classList.add(CELL_CLASS_NAME);
-                    newCell.classList.toggle(lifeStatus(arr, i, j));
+                    newCell.classList.add(lifeStatus(arr, i, j));
                     newCell.setAttribute('data-i', i);
                     newCell.setAttribute('data-j', j);
                     newRow.appendChild(newCell);
+                }
+            }
+        },
+        changeBoard(arr, n, m) {
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < m; j++) {
+                    const currCell = document.querySelector(`td[data-i="${i}"][data-j="${j}"`);
+                    currCell.classList.remove(ALIVE_CELL_CLASS_NAME);
+                    currCell.classList.remove(DEAD_CELL_CLASS_NAME);
+
+                    currCell.classList.add(CELL_CLASS_NAME);
+                    currCell.classList.add(lifeStatus(arr, i, j));
                 }
             }
         },
