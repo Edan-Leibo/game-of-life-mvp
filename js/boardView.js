@@ -51,7 +51,7 @@ export const boardView = (function () {
             create.addEventListener("click", () => {
                 const n = nSize.value;
                 const m = mSize.value;
-                if (!(n > 100 || m > 100 || n < 10 || m < 10)) {
+                if (!(n > 50 || m > 50 || n < 10 || m < 10)) {
                     callback(n, m)
                 }
             }

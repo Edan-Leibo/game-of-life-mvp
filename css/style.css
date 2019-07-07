@@ -35,7 +35,6 @@ input[type=text]{
 
 .board__cell--alive{
     background-color: aqua;
-    transition: all 0.2s;
 }
 
 .board__cell--dead{
