@@ -48,6 +48,9 @@ export const boardPresenter = {
             this.timer = null;
             this.createBoard(n, m);
         });
+        boardView.addCellClickedListener((i, j) => {
+            boardModel.toggleCell(i, j);
+        });
     },
 
     createBoard() {

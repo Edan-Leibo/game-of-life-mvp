@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game Of Life</title>
+
+    <!-- jQuery Modal -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -18,22 +21,59 @@
 
         </table>
     </section>
-    <section class="control-panel">
-        <button class="control-panel__step-button">Step</button>
+
+    <!-- Modal HTML embedded into document -->
+    <div id="create-board-modal" class="modal">
+        <p>Please select the properties for the new board</p>
         <div>
-            <button class="control-panel__play-button">Play</button>
-            <button class="control-panel__stop-button">Stop</button>
+            <label for="density">Density </label>
+        </div>
+        <div>
+            <input type="range" name="density" class="density" min="0" max="100">
+        </div>
+        <div>
+            <label for="rows">Rows (10 to 100) </label>
+        </div>
+        <div>
+            <input type="text" class="rows" min="10" max="100">
+        </div>
+        <div>
+            <label for="cols">Cols (10 to 100) </label>
+        </div>
+        <div>
+            <input type="text" class="rows" min="10" max="100">
+        </div>
+        <a href="#" rel="modal:close" class="button create-board-button">Create Board</a>
+
+    </div>
+
+    <section class="control-panel">
+        <div class="control-panel_group">
             <label for="speed">Speed</label>
+        </div>
+        <div class="control-panel_group">
             <input type="range" name="speed" class="control-panel__speed" min="1" max="100" value="100">
         </div>
-        <div>
-            <label for="density">Density</label>
-            <input type="range" name="density" class="control-panel__density" min="0" max="100">
-            <button class="control-panel__create-board-button">Create Board</button>
+        <div class="control-panel_group">
+            <button class="button control-panel__play-button">Play</button>
+            <button class="button control-panel__stop-button">Stop</button>
+            <button class="button control-panel__step-button">Step</button>
+        </div>
+        <div class="control-panel_group">
+            <!-- Link to open the modal -->
+            <a href="#create-board-modal" rel="modal:open" class="button control-panel__create-board-button">New
+                Board</a>
         </div>
     </section>
-    <script src="/js/main.js" type="module"></script>
 
+    <!--jQuery :) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
+    <!-- My script -->
+    <script src="/js/main.js" type="module"></script>
 </body>
 
 </html>

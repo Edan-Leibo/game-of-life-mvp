@@ -12,10 +12,9 @@ export const boardView = (function () {
     const step = document.querySelector(".control-panel__step-button");
     const play = document.querySelector(".control-panel__play-button");
     const stop = document.querySelector(".control-panel__stop-button");
-    const density = document.querySelector(".control-panel__density");
     const speed = document.querySelector(".control-panel__speed");
-    const create = document.querySelector(".control-panel__create-board-button");
-    const cells = [];   //2d array containing references to all the cells
+    const create = document.querySelector(".create-board-button");
+    const density = document.querySelector(".density");
 
 
 
@@ -48,6 +47,18 @@ export const boardView = (function () {
         addCreateListener(callback) {
             create.addEventListener("click", callback);
         },
+        addCellClickedListener(callback) {
+            board.addEventListener("click", (event) => {
+                const { target } = event;
+                if (target.tagName === "TD") {
+                    const i = target.getAttribute("data-i");
+                    const j = target.getAttribute("data-j");
+                    callback(i, j);
+                    target.classList.toggle(DEAD_CELL_CLASS_NAME);
+                    target.classList.toggle(ALIVE_CELL_CLASS_NAME);
+                }
+            });
+        },
 
         /*
             Renders a new board on the page
@@ -58,13 +69,13 @@ export const boardView = (function () {
             for (let i = 0; i < n; i++) {
                 const newRow = document.createElement('tr');
                 board.appendChild(newRow);
-                cells[i] = [];
                 for (let j = 0; j < m; j++) {
                     const newCell = document.createElement('td');
                     newCell.classList.add(CELL_CLASS_NAME);
                     newCell.classList.toggle(lifeStatus(arr, i, j));
+                    newCell.setAttribute('data-i', i);
+                    newCell.setAttribute('data-j', j);
                     newRow.appendChild(newCell);
-                    cells[i][j] = newCell;
                 }
             }
         },

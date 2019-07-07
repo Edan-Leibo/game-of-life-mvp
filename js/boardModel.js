@@ -21,6 +21,10 @@ export default class ModelBoard {
         this.density = newDensity;
     }
 
+    toggleCell(i, j) {
+        this.board[i][j] = !this.board[i][j];
+    }
+
 
     performStep() {
         let futureBoard = [];
