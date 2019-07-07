@@ -20,9 +20,17 @@
     </section>
     <section class="control-panel">
         <button class="control-panel__step-button">Step</button>
-        <button class="control-panel__play-button">Play</button>
-        <button class="control-panel__stop-button">Stop</button>
-        <button class="control-panel__create-board-button">Create Board</button>
+        <div>
+            <button class="control-panel__play-button">Play</button>
+            <button class="control-panel__stop-button">Stop</button>
+            <label for="speed">Speed</label>
+            <input type="range" name="speed" class="control-panel__speed" min="1" max="100" value="100">
+        </div>
+        <div>
+            <label for="density">Density</label>
+            <input type="range" name="density" class="control-panel__density" min="0" max="100">
+            <button class="control-panel__create-board-button">Create Board</button>
+        </div>
     </section>
     <script src="/js/main.js" type="module"></script>
 

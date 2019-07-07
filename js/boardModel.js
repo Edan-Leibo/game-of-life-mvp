@@ -4,7 +4,7 @@
 export default class ModelBoard {
 
     constructor() {
-        this.THRESHOLD = 4;
+        this.density = 30;
         this.board = [];
     }
 
@@ -12,9 +12,13 @@ export default class ModelBoard {
         for (let i = 0; i < n; i++) {
             this.board[i] = [];
             for (let j = 0; j < m; j++) {
-                this.board[i][j] = Math.floor(Math.random() * 11) > this.THRESHOLD ? false : true;
+                this.board[i][j] = Math.floor(Math.random() * 101) > this.density ? false : true;
             }
         }
+    }
+
+    setDensity(newDensity) {
+        this.density = newDensity;
     }
 
 

@@ -6,6 +6,9 @@ export const boardPresenter = {
     boardView: null,
     n: 1,
     m: 1,
+    isRunning: false,
+    speed: 2000,
+
     init(n, m, boardModel, boardView) {
         this.boardModel = boardModel;
         this.boardView = boardView;
@@ -19,18 +22,32 @@ export const boardPresenter = {
         boardView.addStepListener(() => boardModel.performStep());
         boardView.addPlayListener(() => {
             if (!this.timer) {
-                this.timer = setInterval(boardModel.performStep.bind(boardModel), 2000);
+                this.isRunning = true;
+                this.timer = setInterval(boardModel.performStep.bind(boardModel), this.speed);
             }
         });
+        boardView.addSpeedChangeListener((newSpeed) => {
+            this.speed = 2000 * (parseInt(newSpeed) / 100);
+            if (this.isRunning) {
+                clearInterval(this.timer);
+                this.timer = null;
+                this.timer = setInterval(boardModel.performStep.bind(boardModel), this.speed);
+            }
+        });
+        boardView.addDensityChangeListener((newDensity) => {
+            boardModel.setDensity(newDensity)
+        });
         boardView.addStopListener(() => {
+            this.isRunning = false;
             clearInterval(this.timer);
             this.timer = null;
-        })
+        });
         boardView.addCreateListener(() => {
+            this.isRunning = false;
             clearInterval(this.timer);
             this.timer = null;
             this.createBoard(n, m);
-        })
+        });
     },
 
     createBoard() {
