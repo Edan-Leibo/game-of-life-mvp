@@ -3,8 +3,8 @@ import { boardView } from "./boardView.js";
 import { boardPresenter } from "./boardPresenter.js";
 
 
-const N = 10;
-const M = 15;
+const N = 30;
+const M = 30;
 const boardModel = new BoardModel();
 
 boardPresenter.init(N, M, boardModel, boardView);
