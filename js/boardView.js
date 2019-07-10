@@ -49,10 +49,12 @@ export const boardView = (function () {
         },
         addCreateListener(callback) {
             create.addEventListener("click", () => {
-                const n = nSize.value;
-                const m = mSize.value;
-                if (!(n > 50 || m > 50 || n < 10 || m < 10)) {
-                    callback(n, m)
+                const n = parseInt(nSize.value);
+                const m = parseInt(mSize.value);
+                if ((typeof n == 'number') && (typeof m == 'number')) {
+                    if (!(n > 50 || m > 50 || n < 10 || m < 10)) {
+                        callback(n, m)
+                    }
                 }
             }
             );

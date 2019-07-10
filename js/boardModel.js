@@ -8,6 +8,7 @@ export default class ModelBoard {
     }
 
     createBoard(n, m) {
+        this.board = [];
         for (let i = 0; i < n; i++) {
             this.board[i] = [];
             for (let j = 0; j < m; j++) {

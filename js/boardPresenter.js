@@ -26,9 +26,6 @@ export const boardPresenter = {
 
 
 
-        this.createBoard(n, m);
-
-
         boardView.addStepListener(() => boardModel.performStep());
         boardView.addPlayListener(() => {
             if (!this.timer) {
@@ -57,19 +54,17 @@ export const boardPresenter = {
             clearInterval(this.timer);
             this.timer = null;
 
-            if (!userN || !userM)
-                this.createBoard(this.n, this.m);
-            else {
-                this.n = userN;
-                this.m = userM;
-
-
-                this.createBoard(userN, userM);
-            }
+            this.n = userN;
+            this.m = userM;
+            this.createBoard(userN, userM);
         });
         boardView.addCellClickedListener((i, j) => {
             boardModel.toggleCell(i, j);
         });
+
+
+        this.createBoard(n, m);
+
     },
 
     createBoard() {
